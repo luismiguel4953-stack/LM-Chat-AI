@@ -3,30 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LM Chat AI: asistente web local para practicar conversaciones, guardar historial y recibir respuestas útiles sin servidor.">
     <title>LM Chat AI</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<div class="container">
-    <h1>🤖 LM Chat AI</h1>
+<main class="app-shell" aria-labelledby="app-title">
+    <section class="hero">
+        <p class="eyebrow">Asistente web local</p>
+        <h1 id="app-title">🤖 LM Chat AI</h1>
+        <p class="subtitle">Conversa, pide ideas o crea listas de tareas. Tu historial se guarda en este navegador.</p>
+    </section>
 
-    <div id="chat">
-        <div class="bot">
-            Hola, soy LM Chat AI. ¿En qué puedo ayudarte?
-        </div>
-    </div>
+    <section class="toolbar" aria-label="Acciones del chat">
+        <button class="secondary" id="theme-toggle" type="button" aria-pressed="false">🌙 Modo oscuro</button>
+        <button class="secondary danger" id="clear-chat" type="button">Limpiar chat</button>
+    </section>
 
-    <input
-        type="text"
-        id="mensaje"
-        placeholder="Escribe un mensaje..."
-    >
+    <section id="chat" class="chat" aria-live="polite" aria-label="Conversación">
+        <article class="message bot">
+            <span class="avatar" aria-hidden="true">🤖</span>
+            <div class="bubble">
+                <strong>LM Chat AI</strong>
+                <p>Hola, soy LM Chat AI. Puedo responder saludos, resumir textos cortos, ayudarte a planear tareas y darte ideas rápidas.</p>
+            </div>
+        </article>
+    </section>
 
-    <button onclick="enviarMensaje()">
-        Enviar
-    </button>
-</div>
+    <p id="status" class="status" role="status" aria-live="polite"></p>
+
+    <form id="chat-form" class="composer" autocomplete="off">
+        <label class="sr-only" for="message-input">Escribe tu mensaje</label>
+        <textarea id="message-input" name="message" rows="2" maxlength="600" placeholder="Escribe un mensaje..." required></textarea>
+        <button id="send-button" type="submit">Enviar</button>
+    </form>
+
+    <section class="suggestions" aria-label="Mensajes sugeridos">
+        <button type="button" data-prompt="Ayúdame a organizar mi día">Organizar mi día</button>
+        <button type="button" data-prompt="Dame 5 ideas para mejorar esta app">Ideas para la app</button>
+        <button type="button" data-prompt="Resume este texto: ">Resumir texto</button>
+    </section>
+</main>
 
 <script src="js/app.js"></script>
 
