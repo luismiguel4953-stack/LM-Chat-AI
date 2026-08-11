@@ -1,0 +1,10 @@
+{
+  "name": "LM Chat AI",
+  "short_name": "LM Chat AI",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#070b16",
+  "theme_color": "#0b1020",
+  "lang": "es",
+  "description": "Asistente conversacional LM Chat AI"
+}
