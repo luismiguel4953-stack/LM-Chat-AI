@@ -1,27 +1,34 @@
 # LM Chat AI
 
-LM Chat AI es una aplicación web estática en español que simula un asistente conversacional útil sin depender de un servidor. Está pensada como una base para evolucionar hacia una app real con API de IA, autenticación y almacenamiento remoto.
+Asistente web en español, preparado para funcionar como PWA y conectarse a un backend de IA real.
 
-## Funciones actuales
+## Estado actual
+- Chat con historial local persistente.
+- Modo claro/oscuro.
+- Reconocimiento de voz mediante las APIs disponibles del navegador.
+- Notificaciones del navegador con permiso explícito.
+- Diseño responsive para móvil y escritorio.
+- PWA instalable y funcionamiento offline de la interfaz.
+- Integración con un endpoint de backend configurable desde Ajustes.
+- Sin claves privadas incluidas en el código.
 
-- Interfaz responsive con modo claro y oscuro.
-- Historial persistente en `localStorage` del navegador.
-- Respuestas locales para saludos, resúmenes breves, planificación, ideas y agradecimientos.
-- Botones de prompts sugeridos para iniciar conversaciones rápidamente.
-- Renderizado seguro con nodos DOM en lugar de insertar HTML de usuario.
-- Controles accesibles con etiquetas, regiones `aria-live` y mensajes de estado.
+## Conectar una IA real
+La interfaz acepta un endpoint `POST` configurable desde **⚙️ Ajustes**. El frontend envía JSON con:
 
-## Cómo usarla
+```json
+{
+  "message": "Hola",
+  "messages": [],
+  "model": "modelo"
+}
+```
 
-1. Abre `index.html` en un navegador moderno.
-2. Escribe un mensaje o usa uno de los botones sugeridos.
-3. Usa “Limpiar chat” para borrar el historial local.
-4. Cambia el tema con el botón de modo claro/oscuro.
+El backend debe responder JSON con uno de estos campos: `reply`, `message`, `content`, `output_text` o `choices[0].message.content`.
 
-## Próximos pasos recomendados
+**Producción:** no pongas una API key privada de OpenAI, Gemini u otro proveedor en este repositorio ni en el navegador. Usa un backend/función segura, autentica usuarios y aplica límites de uso.
 
-- Crear un backend para proteger claves privadas de proveedores de IA.
-- Conectar una API real de lenguaje natural.
-- Agregar cuentas de usuario y sincronización de conversaciones.
-- Añadir pruebas automatizadas de interfaz.
-- Permitir exportar conversaciones en JSON o Markdown.
+## Publicación
+Para convertir esta versión web en una aplicación de Play Store se necesita un empaquetado Android (por ejemplo, una aplicación nativa o una capa Trusted Web Activity/WebView bien configurada), además de firma, política de privacidad, declaraciones de datos y pruebas en dispositivos reales.
+
+## Privacidad
+El historial de chat se guarda localmente en el navegador. El contenido enviado al backend depende del endpoint que configure el usuario. Antes de producción debe añadirse una política de privacidad que describa exactamente el tratamiento de datos.
