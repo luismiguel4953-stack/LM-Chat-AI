@@ -1,52 +1,54 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="LM Chat AI: asistente web local para practicar conversaciones, guardar historial y recibir respuestas útiles sin servidor.">
-    <title>LM Chat AI</title>
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0b1020">
+  <meta name="description" content="LM Chat AI: asistente conversacional con historial local, voz, notificaciones y conexión opcional a una API de IA real.">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="css/style.css">
+  <title>LM Chat AI</title>
 </head>
 <body>
-
-<main class="app-shell" aria-labelledby="app-title">
-    <section class="hero">
-        <p class="eyebrow">Asistente web local</p>
-        <h1 id="app-title">🤖 LM Chat AI</h1>
-        <p class="subtitle">Conversa, pide ideas o crea listas de tareas. Tu historial se guarda en este navegador.</p>
-    </section>
-
-    <section class="toolbar" aria-label="Acciones del chat">
-        <button class="secondary" id="theme-toggle" type="button" aria-pressed="false">🌙 Modo oscuro</button>
-        <button class="secondary danger" id="clear-chat" type="button">Limpiar chat</button>
-    </section>
-
-    <section id="chat" class="chat" aria-live="polite" aria-label="Conversación">
-        <article class="message bot">
-            <span class="avatar" aria-hidden="true">🤖</span>
-            <div class="bubble">
-                <strong>LM Chat AI</strong>
-                <p>Hola, soy LM Chat AI. Puedo responder saludos, resumir textos cortos, ayudarte a planear tareas y darte ideas rápidas.</p>
-            </div>
-        </article>
-    </section>
-
-    <p id="status" class="status" role="status" aria-live="polite"></p>
-
-    <form id="chat-form" class="composer" autocomplete="off">
-        <label class="sr-only" for="message-input">Escribe tu mensaje</label>
-        <textarea id="message-input" name="message" rows="2" maxlength="600" placeholder="Escribe un mensaje..." required></textarea>
-        <button id="send-button" type="submit">Enviar</button>
-    </form>
-
-    <section class="suggestions" aria-label="Mensajes sugeridos">
-        <button type="button" data-prompt="Ayúdame a organizar mi día">Organizar mi día</button>
-        <button type="button" data-prompt="Dame 5 ideas para mejorar esta app">Ideas para la app</button>
-        <button type="button" data-prompt="Resume este texto: ">Resumir texto</button>
-    </section>
+<main class="app-shell">
+  <header class="hero">
+    <div class="brand"><span class="brand-icon">✦</span><div><p class="eyebrow">Asistente personal</p><h1>LM Chat AI</h1></div></div>
+    <p class="subtitle">Habla, escribe, organiza tus ideas y conecta una IA real cuando configures tu servidor.</p>
+  </header>
+  <nav class="toolbar" aria-label="Herramientas">
+    <button class="secondary" id="theme-toggle" type="button">🌙 Tema</button>
+    <button class="secondary" id="voice-toggle" type="button">🎙️ Voz</button>
+    <button class="secondary" id="notify-toggle" type="button">🔔 Notificaciones</button>
+    <button class="secondary" id="settings-toggle" type="button">⚙️ Ajustes</button>
+    <button class="secondary danger" id="clear-chat" type="button">🗑️ Limpiar</button>
+  </nav>
+  <section class="connection-card" aria-label="Estado de conexión">
+    <span id="connection-dot" class="dot offline"></span>
+    <div><strong id="connection-title">Modo local</strong><small id="connection-detail">Sin servidor de IA configurado</small></div>
+  </section>
+  <section id="chat" class="chat" aria-live="polite" aria-label="Conversación"></section>
+  <p id="status" class="status" role="status" aria-live="polite"></p>
+  <form id="chat-form" class="composer" autocomplete="off">
+    <label class="sr-only" for="message-input">Escribe tu mensaje</label>
+    <textarea id="message-input" name="message" rows="2" maxlength="8000" placeholder="Escribe o dicta tu mensaje..." required></textarea>
+    <button id="send-button" type="submit">Enviar</button>
+  </form>
+  <section class="suggestions" aria-label="Acciones rápidas">
+    <button type="button" data-prompt="Ayúdame a organizar mi día">Organizar mi día</button>
+    <button type="button" data-prompt="Dame ideas para mejorar mi proyecto">Ideas</button>
+    <button type="button" data-prompt="Resume este texto: ">Resumir</button>
+  </section>
 </main>
-
+<dialog id="settings-dialog">
+  <form method="dialog" id="settings-form" class="settings">
+    <div class="settings-head"><h2>Configuración</h2><button class="secondary" value="cancel" aria-label="Cerrar">✕</button></div>
+    <label>URL de tu API de IA<input id="api-url" type="url" placeholder="https://tu-servidor.example.com/v1/chat"></label>
+    <label>Modelo<input id="model-name" type="text" placeholder="modelo"></label>
+    <label>Token de sesión (opcional)<input id="api-token" type="password" autocomplete="off" placeholder="No guardes claves secretas aquí"></label>
+    <p class="hint">Para producción, usa un backend propio que proteja las claves del proveedor. Nunca publiques una API key privada en este repositorio.</p>
+    <div class="settings-actions"><button class="secondary" value="cancel">Cancelar</button><button value="save">Guardar</button></div>
+  </form>
+</dialog>
 <script src="js/app.js"></script>
-
 </body>
 </html>
